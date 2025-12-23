@@ -1,0 +1,140 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Dashboard - Admin</title>
+    <link href="~/cssDash/styles.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Dashboard</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="~/Dashboard/Index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Charts</li>
+            </ol>
+
+            <!-- Tableau des articles les plus vendus -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-boxes me-1"></i> Articles les Plus Vendus
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nom de l'Article</th>
+                                <th>Quantité Totale Vendue</th>
+                                <th>Total Gagné (TND)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var article in ViewBag.Articles)
+                            {
+                                <tr>
+                                    <td>@article.ArticleName</td>
+                                    <td>@article.TotalQuantity</td>
+                                    <td>@article.TotalGagner.ToString("N2") TND</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-chart-bar me-1"></i> Quantité Vendue
+                        </div>
+                        <div class="card-body">
+                            <canvas id="quantityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-chart-bar me-1"></i> Total Gagné (TND)
+                        </div>
+                        <div class="card-body">
+                            <canvas id="gainChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/jsDash/scripts.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let quantityCtx = document.getElementById('quantityChart').getContext('2d');
+            let gainCtx = document.getElementById('gainChart').getContext('2d');
+            let articleLabels = [];
+            let articleQuantities = [];
+            let articleGains = [];
+
+        @foreach (var article in ViewBag.Articles)
+        {
+            @: articleLabels.push("@article.ArticleName");
+            @: articleQuantities.push(@article.TotalQuantity);
+            @: articleGains.push(@article.TotalGagner);
+        }
+
+            new Chart(quantityCtx, {
+                type: 'bar',
+                data: {
+                    labels: articleLabels,
+                    datasets: [
+                        {
+                            label: 'Quantité Vendue',
+                            data: articleQuantities,
+                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            new Chart(gainCtx, {
+                type: 'bar',
+                data: {
+                    labels: articleLabels,
+                    datasets: [
+                        {
+                            label: 'Total Gagné (TND)',
+                            data: articleGains,
+                            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

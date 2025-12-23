@@ -1,0 +1,81 @@
+﻿@model ApplicationDeGestionERP.Models.G_Fournisseur
+
+@{
+    ViewData["Title"] = "Ajouter un Fournisseur";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    Layout = SignInManager.IsSignedIn(User) && User.IsInRole("Admin")
+        ? "~/Views/Shared/_LayoutAdmin.cshtml"
+        : "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="text-primary"><i class="bi bi-plus-circle"></i> Ajouter un Fournisseur</h1>
+        <a asp-action="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Retour à la liste</a>
+    </div>
+
+    <div class="card shadow p-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="NomFournisseur" class="form-label fw-bold"><i class="bi bi-person"></i> Nom du Fournisseur</label>
+                        <input asp-for="NomFournisseur" class="form-control" placeholder="Ex: Société ABC" />
+                        <span asp-validation-for="NomFournisseur" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Description" class="form-label fw-bold"><i class="bi bi-card-text"></i> Description</label>
+                        <input asp-for="Description" class="form-control" placeholder="Ex: Fournisseur de matériel informatique" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="NumTelephone" class="form-label fw-bold"><i class="bi bi-telephone"></i> Téléphone</label>
+                        <input asp-for="NumTelephone" class="form-control" placeholder="Ex: +216 98 123 456" />
+                        <span asp-validation-for="NumTelephone" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="Adresse" class="form-label fw-bold"><i class="bi bi-geo-alt"></i> Adresse</label>
+                        <input asp-for="Adresse" class="form-control" placeholder="Ex: Rue Habib Bourguiba, Tunis" />
+                        <span asp-validation-for="Adresse" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="TotalMontantAchete" class="form-label fw-bold"><i class="bi bi-cash-stack"></i> Total Montant Acheté (TND)</label>
+                        <input asp-for="TotalMontantAchete" class="form-control" placeholder="Ex: 5000.00" />
+                        <span asp-validation-for="TotalMontantAchete" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="MontantPaye" class="form-label fw-bold"><i class="bi bi-currency-dollar"></i> Montant Payé (TND)</label>
+                        <input asp-for="MontantPaye" class="form-control" placeholder="Ex: 2500.00" />
+                        <span asp-validation-for="MontantPaye" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4">
+                <button type="submit" class="btn btn-success"><i class="bi bi-check-circle"></i> Ajouter</button>
+                <a asp-action="Index" class="btn btn-secondary ms-2"><i class="bi bi-x-circle"></i> Annuler</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

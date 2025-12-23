@@ -1,0 +1,102 @@
+﻿@model IEnumerable<ApplicationDeGestionERP.Models.G_Client>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Détails des Clients - SB Admin</title>
+    <link href="~/cssDash/styles.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="sb-nav-fixed">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Détails des Clients</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="~/Dashboard/Index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Détails des Clients</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i> Liste des Clients
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Adresse</th>
+                                <th>Téléphone</th>
+                                <th>Type</th>
+                                <th>Matricule Fiscale / CIN</th>
+                                <th>Total Achats (TND)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var client in Model)
+                            {
+                                var clientTotal = ViewBag.ClientTotals.ContainsKey(client.ClientID) ? ViewBag.ClientTotals[client.ClientID] : 0;
+                                <tr>
+                                    <td>@client.NomClient</td>
+                                    <td>@client.PrénomClient</td>
+                                    <td>@client.AdresseClient</td>
+                                    <td>@client.TelephoneClient</td>
+                                    <td>@client.TypeClient</td>
+                                    <td>@client.MatriculeFiscaleOuCin</td>
+                                    <td>@clientTotal.ToString("N2") TND</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i> Clients les Plus Rentables
+                </div>
+                <div class="card-body">
+                    <canvas id="clientsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let ctx = document.getElementById('clientsChart').getContext('2d');
+            let clientLabels = [];
+            let clientTotals = [];
+
+        @foreach (var client in Model)
+        {
+            var clientTotal = ViewBag.ClientTotals.ContainsKey(client.ClientID) ? ViewBag.ClientTotals[client.ClientID] : 0;
+            @: clientLabels.push("@client.NomClient @client.PrénomClient");
+            @: clientTotals.push(@clientTotal);
+        }
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: clientLabels,
+                    datasets: [{
+                        label: 'Total Achats (TND)',
+                        data: clientTotals,
+                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

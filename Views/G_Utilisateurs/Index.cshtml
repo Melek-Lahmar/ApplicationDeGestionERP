@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ApplicationDeGestionERP.Models.G_Utilisateurs>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // Utilisation du layout Admin
+    ViewData["Title"] = "Liste des utilisateurs";
+}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Liste des utilisateurs" />
+    <meta name="author" content="ApplicationDeGestionERP" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- Liens CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="~/cssDash/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">@ViewData["Title"]</h1>
+
+        <!-- Bouton d'ajout -->
+        <div class="mb-3">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Ajouter un utilisateur
+            </a>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i> Liste des Utilisateurs
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom d'utilisateur</th>
+                            <th>Email</th>
+                            <th>Rôle</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i> Modifier
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">
+                                        <i class="fas fa-info-circle"></i> Détails
+                                    </a>
+                                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                            <i class="fas fa-trash-alt"></i> Supprimer
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/jsDash/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/assetsDash/demo/chart-area-demo.js"></script>
+    <script src="~/assetsDash/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="~/jsDash/datatables-simple-demo.js"></script>
+</body>
+
+</html>

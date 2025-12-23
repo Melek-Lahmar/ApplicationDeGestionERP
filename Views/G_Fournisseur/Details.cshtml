@@ -1,0 +1,52 @@
+﻿@model ApplicationDeGestionERP.Models.G_Fournisseur
+
+@{
+    ViewData["Title"] = "Détails du Fournisseur";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    Layout = SignInManager.IsSignedIn(User) && User.IsInRole("Admin")
+        ? "~/Views/Shared/_LayoutAdmin.cshtml"
+        : "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="text-primary"><i class="bi bi-info-circle"></i> Détails du Fournisseur</h1>
+        <a asp-action="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Retour à la liste</a>
+    </div>
+
+    <div class="card shadow p-4">
+        <dl class="row">
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-person"></i> Nom du Fournisseur</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.NomFournisseur)</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-card-text"></i> Description</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Description)</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-telephone"></i> Téléphone</dt>
+            <dd class="col-sm-8">+ @Html.DisplayFor(model => model.NumTelephone)</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-geo-alt"></i> Adresse</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Adresse)</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-cash-stack"></i> Total Montant Acheté (TND)</dt>
+            <dd class="col-sm-8 text-success fw-bold">@Model.TotalMontantAchete.ToString("N2") TND</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-currency-dollar"></i> Montant Payé (TND)</dt>
+            <dd class="col-sm-8 text-primary fw-bold">@Model.MontantPaye.ToString("N2") TND</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-exclamation-circle"></i> Montant Non Payé (TND)</dt>
+            <dd class="col-sm-8 text-danger fw-bold">@(Model.TotalMontantAchete - Model.MontantPaye) TND</dd>
+        </dl>
+
+        <div class="d-flex justify-content-end mt-4">
+            <a asp-action="Edit" asp-route-id="@Model?.IDFournisseur" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Modifier</a>
+            <a asp-action="Index" class="btn btn-secondary ms-2"><i class="bi bi-x-circle"></i> Retour</a>
+        </div>
+    </div>
+</div>

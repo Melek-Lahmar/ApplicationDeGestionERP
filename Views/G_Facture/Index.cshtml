@@ -1,0 +1,104 @@
+﻿@model IEnumerable<ApplicationDeGestionERP.Models.G_Facture>
+
+@{
+    ViewData["Title"] = "Liste des Factures";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-6 fw-bold text-primary">Liste des Factures</h1>
+            <p class="text-secondary">Visualisez et gérez vos factures en toute simplicité.</p>
+        </div>
+        <div>
+            <button class="btn btn-primary shadow-sm d-flex align-items-center" onclick="window.location.href='@Url.Action("CreateOrEdit")'">
+                <i class="bi bi-plus-circle fs-5 me-2"></i> Nouvelle Facture
+            </button>
+        </div>
+    </div>
+
+    <form class="d-flex mb-4 shadow-sm p-3 bg-body rounded" method="get" action="@Url.Action("Index")">
+        <input class="form-control me-2" type="search" name="search" value="@ViewData["SearchQuery"]" placeholder="Rechercher une facture (référence, client, date)" aria-label="Search">
+        <button class="btn btn-outline-primary d-flex align-items-center" type="submit">
+            <i class="bi bi-search me-1"></i> Rechercher
+        </button>
+    </form>
+
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-striped align-middle text-center">
+            <thead class="table-primary">
+                <tr class="text-nowrap">
+                    <th>Référence</th>
+                    <th>Date</th>
+                    <th>Client</th>
+                    <th>Montant Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="5" class="text-muted text-center">
+                            <em>Aucune facture trouvée. Cliquez sur "Nouvelle Facture" pour en créer une.</em>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var facture in Model)
+                    {
+                        <tr>
+                            <td>@facture.FactureRef</td>
+                            <td>@facture.DateFacture.ToShortDateString()</td>
+                            <td>
+                                @(facture.Client != null
+                                    ? $"{facture.Client.NomClient} {facture.Client.PrénomClient}"
+                                    : "Client non spécifié")
+                            </td>
+                            <td class="fw-bold">@($"{facture.MontantTotalHT:N2} TND")</td>
+                            <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a asp-action="Details" asp-route-id="@facture.FactureID" class="btn btn-sm btn-info text-white d-flex align-items-center">
+                                        <i class="bi bi-info-circle me-1"></i> Détails
+                                    </a>
+
+                                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="CreateOrEdit" asp-route-id="@facture.FactureID" class="btn btn-sm btn-warning d-flex align-items-center">
+                                            <i class="bi bi-pencil-square me-1"></i> Modifier
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@facture.FactureID" class="btn btn-sm btn-danger d-flex align-items-center"
+                                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette facture ?')">
+                                            <i class="bi bi-trash me-1"></i> Supprimer
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>

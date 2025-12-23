@@ -1,0 +1,62 @@
+﻿@model ApplicationDeGestionERP.Models.G_LigneFacture
+@{
+    var index = ViewData["Index"];
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<tr>
+    <td>
+        <label for="ArticleID_@index" class="form-label">Article</label>
+        <select id="ArticleID_@index" name="LignesFacture[@index].ArticleID" class="form-control" asp-items="ViewBag.ArticleID"></select>
+    </td>
+    <td>
+        <label for="Quantite_@index" class="form-label">Quantité</label>
+        <input id="Quantite_@index" name="LignesFacture[@index].Quantite" type="number" class="form-control" min="1" value="1" />
+    </td>
+    <td>
+        <label for="PrixUnitaire_@index" class="form-label">Prix Unitaire</label>
+        <input id="PrixUnitaire_@index" name="LignesFacture[@index].PrixUnitaire" type="number" class="form-control" />
+    </td>
+    <td>
+        <label for="MontantLigne_@index" class="form-label">Montant</label>
+        <input id="MontantLigne_@index" name="LignesFacture[@index].MontantLigne" type="number" class="form-control" readonly />
+    </td>
+    <td>
+        <button type="button" class="btn btn-danger" onclick="supprimerLigne(this)">Supprimer</button>
+    </td>
+</tr>
+
+<script>
+    function supprimerLigne(button) {
+        // Supprime la ligne correspondante
+        var row = button.closest('tr');
+        row.remove();
+    }
+</script>
+
+<style>
+    tr {
+        display: flex;
+        align-items: center; /* Aligne les éléments au centre verticalement */
+    }
+
+        tr td {
+            padding: 5px; /* Espace entre les cellules */
+        }
+
+    .form-label {
+        margin-bottom: 0.5rem; /* Espacement entre le label et le champ */
+    }
+</style>

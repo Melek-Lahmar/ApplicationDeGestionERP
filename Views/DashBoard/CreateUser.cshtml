@@ -1,0 +1,62 @@
+﻿@* @model ApplicationDeGestionERP.Controllers.DashBoardController
+@model ApplicationDeGestionERP.Models.roleViewModel
+
+@{
+    ViewData["Title"] = "CRR";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // Appel du layout admin
+}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Créer un nouvel utilisateur" />
+    <meta name="author" content="ApplicationDeGestionERP" />
+    <title>Créer un Utilisateur</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="~/cssDash/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <div class="container mt-4">
+        <h1 class="mb-4 text-primary"><i class="fas fa-user-plus"></i> Créer un Utilisateur</h1>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form asp-action="CreateUser" method="post">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Nom d'utilisateur</label>
+                        <input asp-for="UserName" class="form-control" placeholder="Entrez le nom d'utilisateur" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Email</label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Entrez l'email" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Rôle</label>
+                        <select asp-for="SelectedRole" asp-items="Model.AvailableRoles" class="form-select">
+                            <option value="">-- Sélectionner un rôle --</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-user-plus"></i> Créer Utilisateur
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/jsDash/scripts.js"></script>
+</body>
+
+</html> *@

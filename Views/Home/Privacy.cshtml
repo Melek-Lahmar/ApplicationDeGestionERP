@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Politique de Confidentialité";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #343a40;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<div class="container mt-4">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+
+    <div class="section">
+        <h2>1. Qui-sommes Nous</h2>
+        <p> INFOSOFT est une société d’assistance et d’ingénierie informatique,
+            présente en Tunisie, à Sfax et vous offre une large gamme de solutions complètes parfaitement adaptées à vos besoins.
+            INFOSOFT a développé pour vous des offres multi-spécialisées Afin de mettre à la disposition de nos clients des solutions informatiques performantes.
+            INFOSOFT s’est alliée aux meilleurs éditeurs et constructeurs de solutions informatiques dans le monde pour le but de répondre à une approche globale de vos besoins.
+            Notre équipe vous accompagne pendant le cycle de vie de votre système d’information, de la phase d’étude et de conseil jusqu’à la complète adaptation de votre logiciel.
+            INFOSOFT, SAI (société d’assistance informatique) du Sud / Sfax, au cœur de la région, fournit des prestations de services informatiques (maintenance informatique,
+            consulting, intégration, formation) et vendeur de matériel informatique.
+            INFOSOFT se distingue par rapport aux autres intégrateurs Sage par le développement d’une solution de gestion des règlements tiers,
+            gestion des dossiers d’importation et gestion de déclaration employeurs adaptée aux entreprises Tunisiennes et totalement intégrée dans le système d’entreprise.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>2. Informations Collectées</h2>
+        <p>Nous pouvons collecter les informations suivantes :</p>
+        <ul>
+            <li>Données personnelles (nom, adresse, email, etc.)</li>
+            <li>Informations de connexion (adresse IP, type de navigateur, etc.)</li>
+            <li>Données de navigation (pages visitées, durée de visite, etc.)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. Utilisation des Informations</h2>
+        <p>Les informations que nous collectons peuvent être utilisées pour :</p>
+        <ul>
+            <li>Améliorer notre site et nos services</li>
+            <li>Communiquer avec vous concernant vos demandes</li>
+            <li>Envoyer des mises à jour et des informations</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. Protection des Données</h2>
+        <p>Nous prenons des mesures de sécurité appropriées pour protéger vos informations contre tout accès non autorisé ou toute divulgation.</p>
+    </div>
+
+    <div class="section">
+        <h2>5. Vos Droits</h2>
+        <p>Vous avez le droit d'accéder, de corriger ou de supprimer vos informations personnelles. Pour exercer ces droits, veuillez nous contacter.</p>
+    </div>
+
+    <div class="section">
+        <h2>6. Modifications de cette Politique</h2>
+        <p>Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Toute modification sera publiée sur cette page.</p>
+    </div>
+
+    <div class="section">
+        <h2>7. Contact</h2>
+        <p>Pour toute question concernant cette politique de confidentialité, veuillez nous contacter à l'adresse suivante : <a href="mailto:support@votresite.com">support@votresite.com</a>.</p>
+    </div>
+</div>

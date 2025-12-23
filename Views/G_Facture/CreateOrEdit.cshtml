@@ -1,0 +1,316 @@
+﻿@model ApplicationDeGestionERP.Models.G_Facture
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<h2>@(Model.FactureID == 0 ? "Créer une nouvelle facture" : "Modifier la facture")</h2>
+
+<form id="factureForm">
+    <input type="hidden" asp-for="FactureID" />
+
+    <!-- Détails de la facture -->
+    <div>
+        <label asp-for="FactureRef"></label>
+        <input asp-for="FactureRef" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="DateFacture"></label>
+        <input asp-for="DateFacture" type="date" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="ClientID">Client</label>
+        <select asp-for="ClientID" asp-items="ViewBag.Clients" class="form-control">
+            <option value="">-- Sélectionnez un client --</option>
+        </select>
+        <span asp-validation-for="ClientID" class="text-danger"></span>
+    </div>
+
+    <!-- Lignes de Facture -->
+    <h3>Lignes de Facture</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Article</th>
+                <th>Quantité</th>
+                <th>Prix Unitaire</th>
+                <th>Montant</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="ligne-container">
+            @for (int i = 0; i < Model.LignesFacture.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <select asp-for="LignesFacture[@i].ArticleID" asp-items="ViewBag.Articles" class="form-control" onchange="updatePrixUnitaire(this, @i)">
+                            <option value="">-- Sélectionnez un article --</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input asp-for="LignesFacture[@i].Quantite" class="form-control" oninput="calculateMontant(@i)" />
+                    </td>
+                    <td>
+                        <input asp-for="LignesFacture[@i].PrixUnitaire" class="form-control" readonly />
+                    </td>
+                    <td>
+                        <input asp-for="LignesFacture[@i].MontantLigne" class="form-control" readonly />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="removeRow(this)">Supprimer</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Bouton pour ajouter une ligne -->
+    <button type="button" class="btn btn-primary" onclick="addRow()">Ajouter une ligne</button>
+
+    <!-- Montant Total HT et TTC -->
+    <div>
+        <label>Montant Total HT</label>
+        <input type="text" class="form-control" id="MontantTotalHT" value="@Model.MontantTotalHT" readonly />
+    </div>
+    <div>
+        <label>Montant Total TTC</label>
+        <input type="text" class="form-control" id="MontantTotalTTC" value="@Model.MontantTotalTTC" readonly />
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+</form>
+
+@section Scripts {
+    @* <script>
+        function updatePrixUnitaire(selectElement, index) {
+            const articleId = selectElement.value;
+            if (!articleId) return;
+
+            fetch(`/G_Facture/GetPrixUnitaire?articleId=${articleId}`)
+                .then(response => response.json())
+                .then(prixUnitaire => {
+                    const prixUnitaireInput = document.querySelector(`[name="LignesFacture[${index}].PrixUnitaire"]`);
+                    if (prixUnitaireInput) {
+                        prixUnitaireInput.value = prixUnitaire.toFixed(2);
+                    }
+
+                    calculateMontant(index);
+                    updateTotalHTandTTC();
+                })
+                .catch(error => console.error("Erreur lors de la récupération du prix unitaire :", error));
+        }
+
+        function calculateMontant(index) {
+            const quantiteInput = document.querySelector(`[name="LignesFacture[${index}].Quantite"]`);
+            const prixUnitaireInput = document.querySelector(`[name="LignesFacture[${index}].PrixUnitaire"]`);
+            const montantInput = document.querySelector(`[name="LignesFacture[${index}].MontantLigne"]`);
+
+            if (!quantiteInput || !prixUnitaireInput || !montantInput) return;
+
+            const quantite = parseFloat(quantiteInput.value) || 0;
+            const prixUnitaire = parseFloat(prixUnitaireInput.value) || 0;
+            montantInput.value = (quantite * prixUnitaire).toFixed(2);
+
+            updateTotalHTandTTC();
+        }
+
+        function updateTotalHTandTTC() {
+            let totalHT = 0;
+            let totalTTC = 0;
+
+            const lignes = document.querySelectorAll("#ligne-container tr");
+            lignes.forEach((ligne, index) => {
+                const montantLigneInput = ligne.querySelector(`[name="LignesFacture[${index}].MontantLigne"]`);
+                if (montantLigneInput) {
+                    const montant = parseFloat(montantLigneInput.value) || 0;
+                    totalHT += montant;
+                    totalTTC += montant; // Ajoutez la TVA si nécessaire
+                }
+            });
+
+            document.getElementById('MontantTotalHT').value = totalHT.toFixed(2);
+            document.getElementById('MontantTotalTTC').value = totalTTC.toFixed(2);
+        }
+
+        function addRow() {
+            const container = document.getElementById('ligne-container');
+            const rowCount = container.children.length;
+
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                        <td>
+                            <select name="LignesFacture[${rowCount}].ArticleID" class="form-control" onchange="updatePrixUnitaire(this, ${rowCount})">
+                                <option value="">-- Sélectionnez un article --</option>
+        @foreach (var article in ViewBag.Articles)
+        {
+                                        <option value="@article.Value">@article.Text</option>
+        }
+                            </select>
+                        </td>
+                        <td>
+                            <input name="LignesFacture[${rowCount}].Quantite" class="form-control" oninput="calculateMontant(${rowCount})" />
+                        </td>
+                        <td>
+                            <input name="LignesFacture[${rowCount}].PrixUnitaire" class="form-control" readonly />
+                        </td>
+                        <td>
+                            <input name="LignesFacture[${rowCount}].MontantLigne" class="form-control" readonly />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="removeRow(this)">Supprimer</button>
+                        </td>`;
+
+            container.appendChild(newRow);
+        }
+
+        function removeRow(button) {
+            const row = button.closest("tr");
+            if (row) {
+                row.remove();
+                updateIndices();
+                updateTotalHTandTTC();
+            }
+        }
+
+        function updateIndices() {
+            const lignes = document.querySelectorAll("#ligne-container tr");
+            lignes.forEach((ligne, index) => {
+                ligne.querySelectorAll("select, input").forEach(input => {
+                    if (input.name.includes("LignesFacture")) {
+                        const nameParts = input.name.split(".");
+                        nameParts[0] = `LignesFacture[${index}]`;
+                        input.name = nameParts.join(".");
+                        input.setAttribute("onchange", `updatePrixUnitaire(this, ${index})`);
+                        input.setAttribute("oninput", `calculateMontant(${index})`);
+                    }
+                });
+            });
+        }
+    </script>
+
+ *@
+
+    <script>
+        function addRow() {
+            let rowCount = $("#ligne-container tr").length;
+            let newRow = `
+                <tr>
+                    <td>
+                        <select class="form-control articleID" onchange="updatePrixUnitaire(this, ${rowCount})">
+                            <option value="">-- Sélectionnez un article --</option>
+        @foreach (var article in ViewBag.Articles)
+        {
+                                        <option value="@article.Value">@article.Text</option>
+        }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control quantite" min="1" required oninput="calculateMontant(${rowCount})" />
+                    </td>
+                    <td>
+                        <input type="number" class="form-control prixUnitaire" readonly />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control montantLigne" readonly />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="removeRow(this)">Supprimer</button>
+                    </td>
+                </tr>`;
+            $("#ligne-container").append(newRow);
+        }
+
+        function removeRow(button) {
+            $(button).closest("tr").remove();
+            updateTotalHTandTTC();
+        }
+
+        function updatePrixUnitaire(selectElement, index) {
+            let articleId = selectElement.value;
+            if (!articleId) return;
+
+            fetch(`/G_Facture/GetPrixUnitaire?articleId=${articleId}`)
+                .then(response => response.json())
+                .then(prixUnitaire => {
+                    $(`#ligne-container tr:eq(${index}) .prixUnitaire`).val(prixUnitaire.toFixed(2));
+                    calculateMontant(index);
+                })
+                .catch(error => console.error("Erreur de récupération du prix unitaire :", error));
+        }
+
+        function calculateMontant(index) {
+            let quantite = $(`#ligne-container tr:eq(${index}) .quantite`).val();
+            let prixUnitaire = $(`#ligne-container tr:eq(${index}) .prixUnitaire`).val();
+            let montant = (quantite * prixUnitaire).toFixed(2);
+            $(`#ligne-container tr:eq(${index}) .montantLigne`).val(montant);
+            updateTotalHTandTTC();
+        }
+
+        function updateTotalHTandTTC() {
+            let totalHT = 0;
+            $(".montantLigne").each(function () {
+                totalHT += parseFloat($(this).val()) || 0;
+            });
+
+            let totalTTC = totalHT+((totalHT*19)/100); // Add VAT logic here if needed
+            $("#MontantTotalHT").val(totalHT.toFixed(2));
+            $("#MontantTotalTTC").val(totalTTC.toFixed(2));
+        }
+
+        $("#factureForm").submit(function (event) {
+            event.preventDefault();
+
+            let facture = {
+                FactureID: $("#FactureID").val(),
+                FactureRef: $("#FactureRef").val(),
+                DateFacture: $("#DateFacture").val(),
+                ClientID: $("#ClientID").val(),
+                LignesFacture: []
+            };
+
+            $("#ligne-container tr").each(function () {
+                let articleID = $(this).find(".articleID").val();
+                let quantite = $(this).find(".quantite").val();
+                let prixUnitaire = $(this).find(".prixUnitaire").val();
+
+                if (articleID && quantite && prixUnitaire) {
+                    facture.LignesFacture.push({
+                        ArticleID: parseInt(articleID),
+                        Quantite: parseInt(quantite),
+                        PrixUnitaire: parseFloat(prixUnitaire)
+                    });
+                }
+            });
+
+            $.ajax({
+                url: '@Url.Action("CreateOrEdit", "G_Facture")',
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(facture),
+                success: function (response) {
+                    if (response.success) {
+                        alert("Facture enregistrée avec succès!");
+                        window.location.href = "/G_Facture/Index";
+                    } else {
+                        alert(response.message || "Erreur lors de l'enregistrement.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Erreur AJAX : " + error);
+                }
+            });
+        });
+    </script>
+}

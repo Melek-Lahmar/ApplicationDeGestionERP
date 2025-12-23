@@ -1,0 +1,106 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ApplicationDeGestionERP.Helpers;
+
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/print.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<div class="container">
+    <div class="invoice-header">
+        <h1>Facture</h1>
+    </div>
+
+    <div class="info-container" style="display: flex; justify-content: space-between; border: 1px solid #ddd; padding: 10px; margin-bottom: 20px;">
+        <div class="company-info" style="flex: 1; margin-right: 10px;">
+            <p><strong>Nom de ma société :</strong> Infosoft</p>
+            <p><strong>Adresse:</strong> Rue Majida Boulila, Sfax 3000</p>
+            <p><strong>Tél:</strong> (+216) 74 210 049 </p>
+            <p><strong>Email:</strong> contact@einfo.tn</p>
+        </div>
+
+        <div class="invoice-details" style="flex: 1; margin-left: 10px;">
+            <div><strong>Numéro de Facture:</strong> @Model.FactureRef</div>
+            <div><strong>Date:</strong> @Model.DateFacture.ToShortDateString()</div>
+            <div><strong>Client:</strong> @(Model.Client != null ? $"{Model.Client.NomClient} {Model.Client.PrénomClient}" : "Client non spécifié")</div>
+            <div><strong>Adresse:</strong> Rue des Affaires</div>
+        </div>
+    </div>
+
+    <h4>Lignes de Facture</h4>
+    @if (Model.LignesFacture != null && Model.LignesFacture.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Désignation</th>
+                    <th>Quantité</th>
+                    <th>TVA</th>
+                    <th>Prix Unitaire (TND)</th>
+                    <th>Total TTC (TND)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ligne in Model.LignesFacture)
+                {
+                    <tr>
+                        <td>@ligne.Article?.NomArticle</td>
+                        <td>@ligne.Quantite</td>
+                        <td>@ligne.Article?.TVA%</td>
+                        <td>@ligne.PrixUnitaire.ToString("N2")</td>
+                        <td>@ligne.MontantLigne.ToString("N2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Tableau pour les Totaux -->
+        <table class="table" style="width: auto; margin-top: 20px; text-align: left;">
+            <tbody>
+                <tr>
+                    <td style="text-align: right;"><strong>Total HT:</strong></td>
+                    <td>@Model.MontantTotalHT.ToString("N2") TND</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;"><strong>Total TVA:</strong></td>
+                    <td>@ViewBag.totale.ToString("N2") TND</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;"><strong>Timbre Fiscale:</strong></td>
+                    <td>@ViewBag.timbre.ToString("N2") TND</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;"><strong>Total TTC:</strong></td>
+                    <td>@Model.MontantTotalTTC.ToString("N2") TND</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;"><strong>Total en lettres:</strong></td>
+                    <td>@ViewBag.TotalEnLettres Dinars</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-danger">Aucune ligne de facture trouvée.</p>
+    }
+
+    <div class="d-flex justify-content-between mt-4">
+        <a class="btn btn-outline-secondary" asp-action="Index">
+            <i class="fas fa-arrow-left"></i> Retour à la liste des factures
+        </a>
+        <button onclick="window.print()" class="btn btn-primary">
+            <i class="fas fa-print"></i> Imprimer
+        </button>
+    </div>
+</div>

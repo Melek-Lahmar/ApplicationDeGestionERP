@@ -1,0 +1,61 @@
+﻿@model ApplicationDeGestionERP.Models.G_Categorie
+
+@{
+    ViewData["Title"] = "Modifier la Catégorie";
+}
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-primary text-center"><i class="bi bi-pencil-square"></i> Modifier la Catégorie</h2>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <input type="hidden" asp-for="CategorieID" />
+
+                    <div class="form-group mb-3">
+                        <label asp-for="NomCategorie" class="form-label"><i class="bi bi-tag"></i> Nom de la catégorie :</label>
+                        <input asp-for="NomCategorie" class="form-control" />
+                        <span asp-validation-for="NomCategorie" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="DescriptionCategorie" class="form-label"><i class="bi bi-file-earmark-text"></i> Description :</label>
+                        <textarea asp-for="DescriptionCategorie" class="form-control"></textarea>
+                        <span asp-validation-for="DescriptionCategorie" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Retour</a>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

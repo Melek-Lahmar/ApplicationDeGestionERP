@@ -1,0 +1,119 @@
+﻿@model ApplicationDeGestionERP.Models.G_Article
+@{
+    ViewData["Title"] = "Créer un Article";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-primary text-center"><i class="bi bi-plus-circle"></i> Ajouter un Article</h2>
+        <p class="text-muted text-center">Remplissez le formulaire pour ajouter un nouvel article.</p>
+        <hr />
+
+        <form asp-action="Create" class="needs-validation" novalidate>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="ReferenceArticle" class="form-label"><i class="bi bi-tag"></i> Référence</label>
+                        <input asp-for="ReferenceArticle" class="form-control" required />
+                        <span asp-validation-for="ReferenceArticle" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="NomArticle" class="form-label"><i class="bi bi-box"></i> Nom</label>
+                        <input asp-for="NomArticle" class="form-control" required />
+                        <span asp-validation-for="NomArticle" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="DescriptionArticle" class="form-label"><i class="bi bi-file-text"></i> Description</label>
+                        <textarea asp-for="DescriptionArticle" class="form-control" rows="3" required></textarea>
+                        <span asp-validation-for="DescriptionArticle" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="QteStockArticle" class="form-label"><i class="bi bi-boxes"></i> Stock</label>
+                        <input asp-for="QteStockArticle" type="number" class="form-control" required />
+                        <span asp-validation-for="QteStockArticle" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="CategorieID" class="form-label"><i class="bi bi-folder"></i> Catégorie</label>
+                        <select asp-for="CategorieID" class="form-select" asp-items="ViewBag.CategorieID" required></select>
+                        <span asp-validation-for="CategorieID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="PrixAchat" class="form-label"><i class="bi bi-cash"></i> Prix d'achat</label>
+                        <input asp-for="PrixAchat" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="PrixAchat" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="PrixDeVente" class="form-label"><i class="bi bi-tags"></i> Prix de vente</label>
+                        <input asp-for="PrixDeVente" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="PrixDeVente" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="TVA" class="form-label"><i class="bi bi-percent"></i> TVA (%)</label>
+                        <input asp-for="TVA" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="TVA" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ImageUrl" class="form-label"><i class="bi bi-image"></i> URL de l'image</label>
+                        <input asp-for="ImageUrl" class="form-control" id="imageInput" />
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                        <div class="mt-2 text-center">
+                            <img id="previewImage" src="" alt="Aperçu de l'image" class="img-fluid rounded shadow-sm" style="display:none; max-width: 100%; height: auto;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Retour</a>
+                <button type="submit" class="btn btn-success"><i class="bi bi-check-circle"></i> Créer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.getElementById('imageInput').addEventListener('input', function() {
+            var imageUrl = this.value;
+            var imagePreview = document.getElementById('previewImage');
+
+            if (imageUrl) {
+                imagePreview.src = imageUrl;
+                imagePreview.style.display = "block";
+            } else {
+                imagePreview.style.display = "none";
+            }
+        });
+    </script>
+}

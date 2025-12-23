@@ -1,0 +1,70 @@
+﻿@model ApplicationDeGestionERP.Models.G_Client
+
+@{
+    ViewData["Title"] = "Détails du Client";
+}
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    Layout = SignInManager.IsSignedIn(User) && User.IsInRole("Admin")
+        ? "~/Views/Shared/_LayoutAdmin.cshtml"
+        : "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="text-info"><i class="bi bi-eye"></i> Détails du Client</h1>
+        <a asp-action="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Retour à la liste</a>
+    </div>
+
+    <div class="card shadow p-4">
+        <h4 class="text-primary"><i class="bi bi-info-circle"></i> Informations du Client</h4>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong><i class="bi bi-person"></i> Nom :</strong> @Html.DisplayFor(model => model.NomClient)</p>
+                <p><strong><i class="bi bi-person"></i> Prénom :</strong> @Html.DisplayFor(model => model.PrénomClient)</p>
+                <p><strong><i class="bi bi-geo-alt"></i> Adresse :</strong> @Html.DisplayFor(model => model.AdresseClient)</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong><i class="bi bi-telephone"></i> Téléphone :</strong> @Html.DisplayFor(model => model.TelephoneClient)</p>
+                <p><strong><i class="bi bi-person-badge"></i> Type de client :</strong> <span id="typeClient">@Html.DisplayFor(model => model.TypeClient)</span></p>
+                <p><strong><i class="bi bi-file-earmark-text"></i> <span id="labelMatriculeOuCin"></span> :</strong> @Html.DisplayFor(model => model.MatriculeFiscaleOuCin)</p>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+            <a asp-action="Edit" asp-route-id="@Model?.ClientID" class="btn btn-warning me-2">
+                <i class="bi bi-pencil-square"></i> Modifier
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle"></i> Retour à la liste
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let typeClient = document.getElementById("typeClient").textContent.trim();
+            let labelMatriculeOuCin = document.getElementById("labelMatriculeOuCin");
+
+            if (typeClient === "Personne morale") {
+                labelMatriculeOuCin.textContent = "Matricule Fiscale";
+            } else {
+                labelMatriculeOuCin.textContent = "CIN";
+            }
+        });
+    </script>
+}

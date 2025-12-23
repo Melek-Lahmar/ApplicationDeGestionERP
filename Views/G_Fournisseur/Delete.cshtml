@@ -1,0 +1,57 @@
+﻿@model ApplicationDeGestionERP.Models.G_Fournisseur
+
+@{
+    ViewData["Title"] = "Supprimer un Fournisseur";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    Layout = SignInManager.IsSignedIn(User) && User.IsInRole("Admin")
+        ? "~/Views/Shared/_LayoutAdmin.cshtml"
+        : "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="text-danger"><i class="bi bi-trash3"></i> Supprimer le Fournisseur</h1>
+        <a asp-action="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Retour à la liste</a>
+    </div>
+
+    <div class="alert alert-warning">
+        <h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill"></i> Attention !</h4>
+        <p>Êtes-vous sûr de vouloir supprimer ce fournisseur ? Cette action est irréversible.</p>
+    </div>
+
+    <div class="card shadow p-4">
+        <dl class="row">
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-person"></i> Nom du Fournisseur</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.NomFournisseur)</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-card-text"></i> Description</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Description)</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-telephone"></i> Téléphone</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.NumTelephone)</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-geo-alt"></i> Adresse</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Adresse)</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-cash-stack"></i> Total Montant Acheté (TND)</dt>
+            <dd class="col-sm-8 text-success fw-bold">@Model.TotalMontantAchete.ToString("N2") TND</dd>
+
+            <dt class="col-sm-4 fw-bold"><i class="bi bi-currency-dollar"></i> Montant Payé (TND)</dt>
+            <dd class="col-sm-8 text-primary fw-bold">@Model.MontantPaye.ToString("N2") TND</dd>
+        </dl>
+
+        <form asp-action="Delete" class="mt-4">
+            <input type="hidden" asp-for="IDFournisseur" />
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i> Supprimer</button>
+                <a asp-action="Index" class="btn btn-secondary ms-2"><i class="bi bi-x-circle"></i> Annuler</a>
+            </div>
+        </form>
+    </div>
+</div>

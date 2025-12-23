@@ -1,0 +1,59 @@
+﻿@model ApplicationDeGestionERP.Models.G_Categorie
+
+@{
+    ViewData["Title"] = "Créer une Catégorie";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-primary text-center"><i class="bi bi-folder-plus"></i> Ajouter une Catégorie</h2>
+        <p class="text-muted text-center">Remplissez le formulaire pour ajouter une nouvelle catégorie.</p>
+        <hr />
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form asp-action="Create" class="needs-validation" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="NomCategorie" class="form-label"><i class="bi bi-tag"></i> Nom de la Catégorie</label>
+                        <input asp-for="NomCategorie" class="form-control" required />
+                        <span asp-validation-for="NomCategorie" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="DescriptionCategorie" class="form-label"><i class="bi bi-file-text"></i> Description</label>
+                        <textarea asp-for="DescriptionCategorie" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="DescriptionCategorie" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Retour</a>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-check-circle"></i> Créer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

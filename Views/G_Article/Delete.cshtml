@@ -1,0 +1,81 @@
+﻿@model ApplicationDeGestionERP.Models.G_Article
+
+@{
+    ViewData["Title"] = "Suppression d'Article";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<div class="container my-5">
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <strong>Attention :</strong> Cette action est irréversible !
+    </div>
+
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-danger"><i class="bi bi-trash3"></i> Suppression d'Article</h2>
+        <p class="text-center text-muted">Voulez-vous vraiment supprimer cet article ?</p>
+        <hr />
+
+        <div class="row">
+            <!-- Image -->
+            <div class="col-md-4 text-center">
+                <img src="@Model.ImageUrl" alt="Image de l'article" class="img-fluid rounded shadow-sm" style="max-width: 100%; height: auto;" />
+            </div>
+
+            <!-- Détails -->
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class="col-sm-4 fw-bold"><i class="bi bi-tag"></i> Référence :</dt>
+                    <dd class="col-sm-8">@Model.ReferenceArticle</dd>
+
+                    <dt class="col-sm-4 fw-bold"><i class="bi bi-box"></i> Nom :</dt>
+                    <dd class="col-sm-8">@Model.NomArticle</dd>
+
+                    <dt class="col-sm-4 fw-bold"><i class="bi bi-file-text"></i> Description :</dt>
+                    <dd class="col-sm-8">@Model.DescriptionArticle</dd>
+
+                    <dt class="col-sm-4 fw-bold"><i class="bi bi-boxes"></i> Stock :</dt>
+                    <dd class="col-sm-8">@Model.QteStockArticle</dd>
+
+                    <dt class="col-sm-4 fw-bold"><i class="bi bi-cash"></i> Prix d'achat :</dt>
+                    <dd class="col-sm-8 text-success fw-bold">@Model.PrixAchat.ToString("N2") TND</dd>
+
+                    <dt class="col-sm-4 fw-bold"><i class="bi bi-tags"></i> Prix de vente :</dt>
+                    <dd class="col-sm-8 text-danger fw-bold">@Model.PrixDeVente.ToString("N2") TND</dd>
+
+                    <dt class="col-sm-4 fw-bold"><i class="bi bi-percent"></i> TVA :</dt>
+                    <dd class="col-sm-8">@Model.TVA%</dd>
+
+                    <dt class="col-sm-4 fw-bold"><i class="bi bi-folder"></i> Catégorie :</dt>
+                    <dd class="col-sm-8">@Model.Categorie?.NomCategorie</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left-circle me-1"></i> Annuler</a>
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="ArticleID" />
+                <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill me-1"></i> Confirmer la suppression</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>

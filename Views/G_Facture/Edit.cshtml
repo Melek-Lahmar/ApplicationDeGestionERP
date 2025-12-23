@@ -1,0 +1,67 @@
+﻿@model ApplicationDeGestionERP.Models.G_Facture
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<h1>Edit</h1>
+
+<h4>G_Facture</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FactureID" />
+            <div class="form-group">
+                <label asp-for="FactureRef" class="control-label"></label>
+                <input asp-for="FactureRef" class="form-control" />
+                <span asp-validation-for="FactureRef" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateFacture" class="control-label"></label>
+                <input asp-for="DateFacture" class="form-control" />
+                <span asp-validation-for="DateFacture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientID" class="control-label"></label>
+                <select asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
+                <span asp-validation-for="ClientID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MontantTotalHT" class="control-label"></label>
+                <input asp-for="MontantTotalHT" class="form-control" />
+                <span asp-validation-for="MontantTotalHT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MontantTotalTTC" class="control-label"></label>
+                <input asp-for="MontantTotalTTC" class="form-control" />
+                <span asp-validation-for="MontantTotalTTC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

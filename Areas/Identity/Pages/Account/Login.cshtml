@@ -1,0 +1,74 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 450px; width: 100%;">
+        <div class="card-body">
+            <h2 class="text-center mb-4">Connexion à votre compte</h2>
+
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" required placeholder="name@example.com" />
+                    <label asp-for="Input.Email">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" required placeholder="Mot de passe" />
+                    <label asp-for="Input.Password">Mot de passe</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" asp-for="Input.RememberMe" />
+                    <label asp-for="Input.RememberMe" class="form-check-label">Se souvenir de moi</label>
+                </div>
+
+                <button id="login-submit" type="submit" class="btn btn-primary w-100">Se connecter</button>
+
+                <div class="text-center mt-3">
+                    <a id="forgot-password" asp-page="./ForgotPassword" class="text-decoration-none">Mot de passe oublié ?</a>
+                </div>
+
+                <div class="text-center mt-3">
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-outline-secondary w-100">
+                        Créer un compte
+                    </a>
+                </div>
+            </form>
+
+            <hr>
+
+            <div class="text-center">
+                <h5 class="mb-3">Ou se connecter avec :</h5>
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
+                        <p class="text-muted">Aucun service d'authentification externe n'est configuré.</p>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            @foreach (var provider in Model.ExternalLogins!)
+                            {
+                                <button type="submit" class="btn btn-outline-dark w-100 mb-2" name="provider" value="@provider.Name">
+                                    Se connecter avec @provider.DisplayName
+                                </button>
+                            }
+                        </form>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Heroic Features - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assetsI/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="cssI/styles.css" rel="stylesheet" />
+    <style>
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .col-lg-3, .col-xxl-3 {
+            flex: 1;
+            max-width: 23%;
+            margin: 0 10px;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 0 20px;
+        }
+
+        .card-body {
+            flex-grow: 1;
+        }
+
+        .btn-info {
+            color: white;
+            width: 250px;
+            margin-top: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Amélioration des icônes (réduction de la taille) */
+        .feature {
+            background: linear-gradient(45deg, #007bff, #6c757d);
+            color: white;
+            border-radius: 50%;
+            padding: 12px; /* Réduit la taille des icônes */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: -40px;
+        }
+
+            .feature i {
+                font-size: 1.8rem; /* Réduit la taille des icônes */
+            }
+
+        .card-body h2 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .card-body p {
+            color: #6c757d;
+        }
+
+        /* Changement du fond de la section "Bienvenue" */
+        .custom-header {
+            background: linear-gradient(45deg, white, white); /* Nouveau fond avec dégradé */
+            padding: 100px 0;
+        }
+
+            .custom-header .bg-light {
+                background: rgba(0, 0, 0, 0.6) !important;
+            }
+
+            .custom-header h1,
+            .custom-header p {
+                color: white;
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Header-->
+    <header class="py-5 custom-header">
+        <div class="container px-lg-5">
+            <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+                <div class="m-4 m-lg-5">
+                    <h1 class="display-5 fw-bold text-white">Bienvenue</h1>
+                    <p class="fs-4 text-white">
+                        Découvrez comment <a href="https://www.infosoft.tn/" class="text-info">développer des applications</a>
+                        avec Infosoft, votre partenaire technologique de confiance.
+                    </p>
+                    <a href="https://www.infosoft.tn/"S class="btn btn-lg btn-primary" type="button">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content-->
+    <section class="pt-4">
+        <div class="container px-lg-5">
+            <!-- Page Features-->
+            <div class="row gx-lg-5">
+                <!-- Gestion des produits -->
+                <div class="col-lg-3 col-xxl-3 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-cart4"></i></div>
+                            <h2 class="fs-4 fw-bold text-secondary">Gestion des produits</h2>
+                            <p class="mb-0">Ajoutez, modifiez et gérez les produits de votre stock. Vous pouvez suivre les quantités, les prix, et bien plus encore.</p>
+                        </div>
+                        <a class="btn btn-info text-white" asp-controller="G_Article" asp-action="Index">
+                            <i class="bi bi-cart4 me-2"></i> Gérer les produits
+                        </a>
+                        <br />
+                    </div>
+                </div>
+
+                <!-- Gestion des ventes -->
+                <div class="col-lg-3 col-xxl-3 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-box"></i></div>
+                            <h2 class="fs-4 fw-bold text-secondary">Gestion de Ventes</h2>
+                            <p class="mb-0">Suivez les niveaux de stock, ajoutez des articles, et assurez-vous que votre inventaire est toujours à jour pour éviter les ruptures.</p>
+                        </div>
+                        <a class="btn btn-info text-white" asp-controller="G_Facture" asp-action="Index">
+                            <i class="bi bi-box me-2"></i> Gérer les ventes
+                        </a>
+                        <br />
+                    </div>
+                </div>
+
+                <!-- Gestion des fournisseurs -->
+                <div class="col-lg-3 col-xxl-3 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-truck"></i></div>
+                            <h2 class="fs-4 fw-bold text-secondary">Gestion des fournisseurs</h2>
+                            <p class="mb-0">Ajoutez et gérez les informations de vos fournisseurs. Suivez les commandes, les paiements, et maintenez de bonnes relations avec vos partenaires.</p>
+                        </div>
+                        <a class="btn btn-info text-white" asp-controller="G_Fournisseur" asp-action="Index">
+                            <i class="bi bi-truck me-2"></i> Gérer les fournisseurs
+                        </a>
+                        <br />
+                    </div>
+                </div>
+
+                <!-- Gestion des clients -->
+                <div class="col-lg-3 col-xxl-3 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-person-circle"></i></div>
+                            <h2 class="fs-4 fw-bold text-secondary">Gestion des clients</h2>
+                            <p class="mb-0">Enregistrez et gérez les informations des clients. Suivez leurs commandes et fidélisez-les avec des offres spéciales.</p>
+                        </div>
+                        <a class="btn btn-info text-white" asp-controller="G_Client" asp-action="Index">
+                            <i class="bi bi-person-circle me-2"></i> Gérer les clients
+                        </a>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer-->
+    <!-- Ajoute ici ton footer si nécessaire -->
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="jsI/scripts.js"></script>
+</body>
+</html>
