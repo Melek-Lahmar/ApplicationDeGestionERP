@@ -234,11 +234,13 @@ Cette documentation présente les diagrammes de cas d'utilisation du système de
 
 Vous pouvez choisir l'une des deux méthodes ci-dessous :
 
-#🔹 Méthode 1 : Cloner avec Git (Recommandé)
+🔹 Méthode 1 : Cloner avec Git (Recommandé)
+
 git clone https://github.com/Melek-Lahmar/ApplicationDeGestionERP.git
+
 cd ApplicationDeGestionERP
 
-#🔹 Méthode 2 : Téléchargement ZIP
+🔹 Méthode 2 : Téléchargement ZIP
 
 Accédez à : https://github.com/Melek-Lahmar/ApplicationDeGestionERP
 
