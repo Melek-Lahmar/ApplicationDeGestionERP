@@ -230,88 +230,88 @@ Cette documentation présente les diagrammes de cas d'utilisation du système de
 
 ### 📁 Structure des Dossiers
 
+# Structure du projet ApplicationDeGestionERP
+
 ApplicationDeGestionERP/
-│
-├── 📄 FICHIERS RACINE
-│   ├── ApplicationDeGestionERP.csproj        # Configuration du projet .NET
-│   ├── ApplicationDeGestionERP.sln           # Solution Visual Studio
-│   ├── Program.cs                             # Point d'entrée de l'application
-│   ├── appsettings.json                       # Configuration générale
-│   ├── appsettings.Development.json           # Configuration développement
-│   └── README.md                              # Documentation du projet
-│
-├── 📦 AREAS (Modules fonctionnels)
-│   ├── Employes/                              # Module gestion des employés
-│   │   ├── Controllers/
-│   │   ├── Models/
-│   │   └── Views/
-│   │
-│   └── Identity/                              # Module authentification
-│       └── Pages/
-│           ├── Account/                       # Pages de connexion, inscription
-│           └── Manage/                        # Gestion du compte utilisateur
-│
-├── 🎮 CONTROLLERS
-│   ├── HomeController.cs                       # Page d'accueil
-│   ├── DashBoardController.cs                  # Tableau de bord
-│   ├── G_ArticleController.cs                  # Gestion articles
-│   ├── G_CategorieController.cs                # Gestion catégories
-│   ├── G_ClientController.cs                   # Gestion clients
-│   ├── G_FactureController.cs                  # Gestion factures
-│   ├── G_FournisseurController.cs              # Gestion fournisseurs
-│   └── G_UtilisateursController.cs             # Gestion utilisateurs
-│
-├── 📊 MODELS
-│   ├── G_Article.cs                            # Modèle Article
-│   ├── G_Categorie.cs                          # Modèle Catégorie
-│   ├── G_Client.cs                              # Modèle Client
-│   ├── G_Facture.cs                             # Modèle Facture
-│   ├── G_Fournisseur.cs                         # Modèle Fournisseur
-│   ├── G_LigneFacture.cs                        # Modèle Ligne de facture
-│   ├── G_Utilisateurs.cs                        # Modèle Utilisateur
-│   └── ErrorViewModel.cs                        # Modèle d'erreur
-│
-├── 🗄️ DATABASE
-│   ├── Data/
-│   │   └── ApplicationDbContextes.cs            # Contexte de base de données
-│   │
-│   └── Migrations/                              # Migrations Entity Framework
-│       └── *.cs                                 # Fichiers de migration
-│
-├── 🎨 VIEWS
-│   ├── Home/                                    # Pages publiques
-│   ├── DashBoard/                               # Interface tableau de bord
-│   ├── G_Article/                               # Interface articles
-│   ├── G_Categorie/                             # Interface catégories
-│   ├── G_Client/                                # Interface clients
-│   ├── G_Facture/                               # Interface factures
-│   ├── G_Fournisseur/                           # Interface fournisseurs
-│   ├── G_Utilisateurs/                          # Interface utilisateurs
-│   └── Shared/                                  # Templates partagés
-│       ├── _Layout.cshtml                       # Layout principal
-│       ├── _LayoutAdmin.cshtml                  # Layout administrateur
-│       └── _LoginPartial.cshtml                 # Partiel connexion
-│
-├── 📁 WWWROOT (Assets statiques)
-│   ├── css/                                     # Feuilles de style personnalisées
-│   ├── js/                                      # Scripts JavaScript
-│   ├── images/                                  # Images et logos
-│   ├── assetsDash/                              # Assets du tableau de bord
-│   ├── assetsI/                                 # Assets d'interface
-│   └── lib/                                     # Bibliothèques tierces
-│       ├── bootstrap/                           # Framework CSS
-│       ├── jquery/                              # Bibliothèque JavaScript
-│       ├── jquery-validation/                   # Validation de formulaires
-│       └── jquery-validation-unobtrusive/       # Validation non intrusive
-│
-├── 🛠️ HELPERS
-│   └── NumberToWordsConverter.cs                # Utilitaire de conversion nombres en mots
-│
-├── ⚙️ PROPERTIES
-│   └── launchSettings.json                       # Paramètres de lancement
-│
-├── 📦 BIN/                                      # Fichiers compilés
-└── 📦 OBJ/                                      # Fichiers temporaires de compilation
+- FICHIERS RACINE
+  - ApplicationDeGestionERP.csproj        # Configuration du projet .NET
+  - ApplicationDeGestionERP.sln           # Solution Visual Studio
+  - Program.cs                             # Point d'entrée de l'application
+  - appsettings.json                       # Configuration générale
+  - appsettings.Development.json           # Configuration développement
+  - README.md                              # Documentation du projet
+
+- AREAS (Modules fonctionnels)
+  - Employes/                              # Module gestion des employés
+    - Controllers/
+    - Models/
+    - Views/
+  - Identity/                              # Module authentification
+    - Pages/
+      - Account/                           # Pages de connexion, inscription
+      - Manage/                            # Gestion du compte utilisateur
+
+- CONTROLLERS
+  - HomeController.cs                       # Page d'accueil
+  - DashBoardController.cs                  # Tableau de bord
+  - G_ArticleController.cs                  # Gestion articles
+  - G_CategorieController.cs                # Gestion catégories
+  - G_ClientController.cs                   # Gestion clients
+  - G_FactureController.cs                  # Gestion factures
+  - G_FournisseurController.cs              # Gestion fournisseurs
+  - G_UtilisateursController.cs             # Gestion utilisateurs
+
+- MODELS
+  - G_Article.cs                            # Modèle Article
+  - G_Categorie.cs                          # Modèle Catégorie
+  - G_Client.cs                              # Modèle Client
+  - G_Facture.cs                             # Modèle Facture
+  - G_Fournisseur.cs                         # Modèle Fournisseur
+  - G_LigneFacture.cs                        # Modèle Ligne de facture
+  - G_Utilisateurs.cs                        # Modèle Utilisateur
+  - ErrorViewModel.cs                        # Modèle d'erreur
+
+- DATABASE
+  - Data/
+    - ApplicationDbContextes.cs            # Contexte de base de données
+  - Migrations/                             # Migrations Entity Framework
+    - *.cs                                 # Fichiers de migration
+
+- VIEWS
+  - Home/                                   # Pages publiques
+  - DashBoard/                              # Interface tableau de bord
+  - G_Article/                              # Interface articles
+  - G_Categorie/                            # Interface catégories
+  - G_Client/                               # Interface clients
+  - G_Facture/                              # Interface factures
+  - G_Fournisseur/                          # Interface fournisseurs
+  - G_Utilisateurs/                         # Interface utilisateurs
+  - Shared/                                 # Templates partagés
+    - _Layout.cshtml                        # Layout principal
+    - _LayoutAdmin.cshtml                   # Layout administrateur
+    - _LoginPartial.cshtml                  # Partiel connexion
+
+- WWWROOT (Assets statiques)
+  - css/                                    # Feuilles de style personnalisées
+  - js/                                     # Scripts JavaScript
+  - images/                                 # Images et logos
+  - assetsDash/                             # Assets du tableau de bord
+  - assetsI/                                # Assets d'interface
+  - lib/                                    # Bibliothèques tierces
+    - bootstrap/                            # Framework CSS
+    - jquery/                               # Bibliothèque JavaScript
+    - jquery-validation/                    # Validation de formulaires
+    - jquery-validation-unobtrusive/       # Validation non intrusive
+
+- HELPERS
+  - NumberToWordsConverter.cs               # Utilitaire de conversion nombres en mots
+
+- PROPERTIES
+  - launchSettings.json                      # Paramètres de lancement
+
+- BIN/                                      # Fichiers compilés
+- OBJ/                                      # Fichiers temporaires de compilation
+
 
 ---
 
