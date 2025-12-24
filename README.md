@@ -91,15 +91,95 @@ L'application suit strictement le pattern **Modèle-Vue-Contrôleur** :<img widt
 <img width="833" height="689" alt="image" src="https://github.com/user-attachments/assets/d4280ec9-5ece-4c8b-88f8-5c5238d8fe3f" />
 
 
-### Diagrammes de Cas d'Utilisation
-- **Gestion des Produits** : CRUD complet avec contraintes de stock
-<img width="966" height="665" alt="image" src="https://github.com/user-attachments/assets/d4a66543-8baa-4692-bc75-563cdfbd9bf7" />
-- **Gestion des Clients** : Distinction personnes physiques/morales
-<img width="945" height="583" alt="image" src="https://github.com/user-attachments/assets/c356f4de-71b5-4cf9-b503-c3e9f20f2cce" />
-- **Gestion des Factures** : Workflow complet de création à impression
-<img width="894" height="400" alt="image" src="https://github.com/user-attachments/assets/46307fb1-37b1-44dc-b1c5-b2dd9410c2b8" />
-- **Gestion des Fournisseurs** : Suivi des commandes et paiements
-<img width="922" height="561" alt="image" src="https://github.com/user-attachments/assets/b18efa0c-cf31-4611-af50-fba645568361" />
+## 📋 Diagrammes de Cas d'Utilisation
+
+Cette documentation présente les diagrammes de cas d'utilisation du système de gestion, détaillant les interactions entre les acteurs (utilisateurs) et les fonctionnalités principales.
+
+### 🛒 Gestion des Produits
+**Description** : Système complet de création, lecture, mise à jour et suppression (CRUD) des produits avec gestion avancée des contraintes de stock et des catégories.
+
+**Fonctionnalités principales** :
+- Création et gestion du catalogue produits
+- Contrôle des niveaux de stock (alertes, seuils minimum)
+- Organisation par catégories et sous-catégories
+- Gestion des prix et promotions
+- Suivi des mouvements d'inventaire
+
+![Diagramme Gestion des Produits](https://github.com/user-attachments/assets/d4a66543-8baa-4692-bc75-bc3e9fbd9bf7)
+
+### 👥 Gestion des Clients
+**Description** : Gestion différenciée des clients selon leur profil (personnes physiques vs personnes morales) avec historique des interactions.
+
+**Fonctionnalités principales** :
+- Enregistrement des clients avec typologie distincte
+- Profils complets (coordonnées, historique d'achats)
+- Segmentation clientèle
+- Suivi des relations commerciales
+
+![Diagramme Gestion des Clients](https://github.com/user-attachments/assets/c356f4de-71b5-4cf9-b503-c3e9f20f2cce)
+
+### 🏷️ Gestion des Catégories
+**Description** : Organisation hiérarchique des produits par catégories et sous-catégories pour une navigation et gestion optimisées.
+
+**Fonctionnalités principales** :
+- Création d'arborescences catégorielles
+- Attribution multi-niveaux
+- Gestion des propriétés par catégorie
+- Organisation du catalogue produit
+
+### 📄 Gestion des Factures - Interface Utilisateur
+**Description** : Workflow complet de traitement des factures depuis la création jusqu'à l'impression pour les utilisateurs standards.
+
+**Fonctionnalités principales** :
+- Génération de factures
+- Ajout de lignes de produits
+- Calcul automatique des taxes et totaux
+- Impression et export des documents
+
+![Diagramme Gestion des Factures - Utilisateur](https://github.com/user-attachments/assets/46307fb1-37b1-44dc-b1c5-b2dd9410c2b8)
+
+### 📊 Gestion des Factures - Interface Administrateur
+**Description** : Fonctionnalités étendues de gestion des factures réservées aux administrateurs du système.
+
+**Fonctionnalités principales** :
+- Validation et approbation des factures
+- Gestion des remises exceptionnelles
+- Suivi du cycle de vie des factures
+- Reporting et statistiques financières
+- Archivage et conservation légale
+
+![Diagramme Gestion des Factures - Administrateur](https://github.com/user-attachments/assets/fda8a015-8409-4560-bb0b-b53a1c6c6b6f)
+
+### 📦 Gestion des Fournisseurs
+**Description** : Suivi intégral des relations avec les fournisseurs, des commandes aux paiements.
+
+**Fonctionnalités principales** :
+- Gestion du référentiel fournisseurs
+- Suivi des commandes d'approvisionnement
+- Traçabilité des livraisons
+- Gestion des paiements et règlements
+- Évaluation des performances fournisseurs
+
+![Diagramme Gestion des Fournisseurs](https://github.com/user-attachments/assets/b18efa0c-cf31-4611-af50-fba645568361)
+
+## 🎯 Objectifs du Système
+
+Ce système de gestion permet :
+- **Une traçabilité complète** de toutes les opérations commerciales
+- **Une différenciation des rôles** avec permissions adaptées
+- **Une automatisation** des processus métiers critiques
+- **Une conformité** aux exigences réglementaires
+- **Une scalabilité** pour l'évolution future des besoins
+
+## 👥 Acteurs du Système
+
+- **Utilisateur standard** : Opérations quotidiennes de gestion
+- **Administrateur** : Supervision, validation et reporting
+- **Système** : Processus automatisés et notifications
+
+---
+
+*Les diagrammes présentent l'architecture fonctionnelle du système et servent de référence pour le développement et la documentation technique.*/>
 
 ## 🖥️ Interfaces Utilisateur
 
