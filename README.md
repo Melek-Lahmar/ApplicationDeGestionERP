@@ -1,6 +1,6 @@
 # Application de Gestion ERP - Stage Infosoft
 
-![ASP.NET Core]<img width="418" height="209" alt="image" src="https://github.com/user-attachments/assets/00d53768-dbd6-47d4-b4e5-41563f002023" />
+![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-8.0-purple?style=for-the-badge&logo=.net)
 
 ![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-red?style=for-the-badge&logo=microsoft-sql-server)
 ![MVC](https://img.shields.io/badge/Architecture-MVC-blue?style=for-the-badge)
