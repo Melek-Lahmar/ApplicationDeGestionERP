@@ -11,13 +11,9 @@
 - [🏗️ Architecture Technique](#️-architecture-technique)
 - [📊 Diagrammes UML](#-diagrammes-uml)
 - [🖥️ Interfaces Utilisateur](#️-interfaces-utilisateur)
-- [⚙️ Installation et Configuration](#️-installation-et-configuration)
-- [🚀 Déploiement](#-déploiement)
 - [📁 Structure du Projet](#-structure-du-projet)
-- [📈 Résultats et Statistiques](#-résultats-et-statistiques)
-- [📄 Rapport de Stage](#-rapport-de-stage)
-- [🤝 Contribution](#-contribution)
-- [📄 Licence](#-licence)
+- [⚙️ Installation et Configuration](#️-installation-et-configuration)
+
 
 ## 📖 Introduction
 
@@ -231,11 +227,23 @@ Cette documentation présente les diagrammes de cas d'utilisation du système de
 
 ---
 
-## 🎯 Caractéristiques Techniques
-- Interface responsive (desktop/tablette/mobile)
-- Calculs automatiques (TVA, totaux, marges)
-- Système d'alerte stocks et commandes
-- Export PDF/Excel des documents
-- Recherche et filtres multicritères
-- Historique complet des opérations
-- Sécurité multi-niveaux (rôles/permissions)
+
+## ⚙️ Installation Locale (Développement)
+
+### 📥 1. Téléchargement du Projet
+
+**Choisissez une méthode :**
+
+#### 🔹 Méthode 1 : Cloner avec Git (Recommandé)
+```bash
+git clone https://github.com/Melek-Lahmar/ApplicationDeGestionERP.git
+cd ApplicationDeGestionERP
+
+#### 🔹 Méthode 2 : Téléchargement ZIP
+Accédez à : https://github.com/Melek-Lahmar/ApplicationDeGestionERP
+
+Cliquez sur "Code" → "Download ZIP"
+
+Extrayez l'archive dans votre dossier de travail
+
+Ouvrez un terminal dans le dossier extrait
