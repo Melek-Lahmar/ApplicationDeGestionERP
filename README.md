@@ -228,7 +228,7 @@ Cette documentation présente les diagrammes de cas d'utilisation du système de
 ---
 
 
-## ⚙️ Installation Locale (Développement)
+## ⚙️ Installation et Configuration
 
 ### 📥 1. Téléchargement du Projet
 
