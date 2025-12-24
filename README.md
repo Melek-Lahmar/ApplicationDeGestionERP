@@ -89,3 +89,25 @@ L'application suit strictement le pattern **Modèle-Vue-Contrôleur** :<img widt
 
 ### Diagramme de Cas d'utilisation Global
 <img width="833" height="689" alt="image" src="https://github.com/user-attachments/assets/d4280ec9-5ece-4c8b-88f8-5c5238d8fe3f" />
+
+
+### Diagrammes de Cas d'Utilisation
+- **Gestion des Produits** : CRUD complet avec contraintes de stock
+- **Gestion des Clients** : Distinction personnes physiques/morales
+- **Gestion des Factures** : Workflow complet de création à impression
+- **Gestion des Fournisseurs** : Suivi des commandes et paiements
+
+## 🖥️ Interfaces Utilisateur
+
+### Tableau de Bord Principal
+![Tableau de Bord](https://via.placeholder.com/800x400/4A90E2/FFFFFF?text=Dashboard+ERP)
+*Interface centralisée avec indicateurs clés et graphiques de performance*
+
+### Gestion des Factures
+```html
+Interface comportant :
+• Liste paginée des factures avec filtres avancés
+• Formulaire de création avec sélection dynamique des produits
+• Calcul automatique des totaux (HT, TVA, TTC)
+• Système d'impression intégré avec mise en page professionnelle
+• Visualisation détaillée avec lignes de facture
