@@ -1,4 +1,4 @@
-# Application de Gestion ERP - Stage Infosoft
+# Application de Gestion ERP - Stage 
 
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-8.0-purple?style=for-the-badge&logo=.net)
 ![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-red?style=for-the-badge&logo=microsoft-sql-server)
