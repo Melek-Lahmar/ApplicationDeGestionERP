@@ -228,7 +228,7 @@ Cette documentation présente les diagrammes de cas d'utilisation du système de
 ---
 
 
-### 📁 Structure des Dossiers
+### 📁 Structure du Projet
 
 # Structure du projet ApplicationDeGestionERP
 
