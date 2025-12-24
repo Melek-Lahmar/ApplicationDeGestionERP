@@ -93,14 +93,18 @@ L'application suit strictement le pattern **Modèle-Vue-Contrôleur** :<img widt
 
 ### Diagrammes de Cas d'Utilisation
 - **Gestion des Produits** : CRUD complet avec contraintes de stock
+<img width="966" height="665" alt="image" src="https://github.com/user-attachments/assets/d4a66543-8baa-4692-bc75-563cdfbd9bf7" />
 - **Gestion des Clients** : Distinction personnes physiques/morales
+<img width="945" height="583" alt="image" src="https://github.com/user-attachments/assets/c356f4de-71b5-4cf9-b503-c3e9f20f2cce" />
 - **Gestion des Factures** : Workflow complet de création à impression
+<img width="894" height="400" alt="image" src="https://github.com/user-attachments/assets/46307fb1-37b1-44dc-b1c5-b2dd9410c2b8" />
 - **Gestion des Fournisseurs** : Suivi des commandes et paiements
+<img width="922" height="561" alt="image" src="https://github.com/user-attachments/assets/b18efa0c-cf31-4611-af50-fba645568361" />
 
 ## 🖥️ Interfaces Utilisateur
 
 ### Tableau de Bord Principal
-![Tableau de Bord](https://via.placeholder.com/800x400/4A90E2/FFFFFF?text=Dashboard+ERP)
+<img width="1919" height="838" alt="image" src="https://github.com/user-attachments/assets/5ccfa7aa-78a8-4d45-98c7-315a765ca5f4" />
 *Interface centralisée avec indicateurs clés et graphiques de performance*
 
 ### Gestion des Factures
