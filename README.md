@@ -21,12 +21,8 @@
 
 ## 📖 Introduction
 
-**Application de Gestion ERP** est une solution web complète développée dans le cadre d'un stage professionnel chez **Infosoft** (Sfax, Tunisie). Cette application permet la gestion intégrée des ventes, des stocks, des clients, des fournisseurs et des factures pour les entreprises.
+**Application de Gestion ERP** est une solution web complète développée dans le cadre d'un stage professionnel . Cette application permet la gestion intégrée des ventes, des stocks, des clients, des fournisseurs et des factures pour les entreprises.
 
-**Période de stage** : 6 Janvier 2025 - 31 Janvier 2025  
-**Encadrant** : M. Mohamed Dhieb (Chef de Projet)  
-**Développeur principal** : M. Majdi Radadi  
-**Entreprise** : Infosoft - Spécialiste en solutions Sage et développement d'applications métier
 
 ### Objectifs du Projet
 - Automatiser la gestion commerciale d'une entreprise
@@ -85,3 +81,11 @@
 ### Architecture MVC
 L'application suit strictement le pattern **Modèle-Vue-Contrôleur** :<img width="700" height="393" alt="image" src="https://github.com/user-attachments/assets/0bc3828a-339c-4602-9d96-6629a375aa3a" />
 
+
+## 📊 Diagrammes UML
+
+### Diagramme de Classes Global
+<img width="985" height="853" alt="image" src="https://github.com/user-attachments/assets/53ea1f41-6fbc-499b-bc07-2ab714b2c80e" />
+
+### Diagramme de Cas d'utilisation Global
+<img width="833" height="689" alt="image" src="https://github.com/user-attachments/assets/d4280ec9-5ece-4c8b-88f8-5c5238d8fe3f" />
