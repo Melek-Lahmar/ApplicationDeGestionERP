@@ -1,6 +1,7 @@
 # Application de Gestion ERP - Stage Infosoft
 
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-8.0-purple?style=for-the-badge&logo=.net)
+![ASP.NET Core]<img width="418" height="209" alt="image" src="https://github.com/user-attachments/assets/00d53768-dbd6-47d4-b4e5-41563f002023" />
+
 ![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-red?style=for-the-badge&logo=microsoft-sql-server)
 ![MVC](https://img.shields.io/badge/Architecture-MVC-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
@@ -83,4 +84,5 @@
 | **Génération PDF** | iTextSharp, Rotativa | - |
 
 ### Architecture MVC
-L'application suit strictement le pattern **Modèle-Vue-Contrôleur** :
+L'application suit strictement le pattern **Modèle-Vue-Contrôleur** :<img width="700" height="393" alt="image" src="https://github.com/user-attachments/assets/0bc3828a-339c-4602-9d96-6629a375aa3a" />
+
