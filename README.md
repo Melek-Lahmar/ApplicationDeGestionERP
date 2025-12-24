@@ -76,7 +76,6 @@
 | **ORM** | Entity Framework Core | 8.0 |
 | **Authentification** | ASP.NET Core Identity | 8.0 |
 | **Graphiques** | Chart.js | 4.4 |
-| **Génération PDF** | iTextSharp, Rotativa | - |
 
 ### Architecture MVC
 L'application suit strictement le pattern **Modèle-Vue-Contrôleur** :<img width="700" height="393" alt="image" src="https://github.com/user-attachments/assets/0bc3828a-339c-4602-9d96-6629a375aa3a" />
@@ -173,15 +172,70 @@ Cette documentation présente les diagrammes de cas d'utilisation du système de
 
 ## 🖥️ Interfaces Utilisateur
 
-### Tableau de Bord Principal
-<img width="1919" height="838" alt="image" src="https://github.com/user-attachments/assets/5ccfa7aa-78a8-4d45-98c7-315a765ca5f4" />
-*Interface centralisée avec indicateurs clés et graphiques de performance*
+### 📊 Tableau de Bord
+<img width="1915" height="833" alt="image" src="https://github.com/user-attachments/assets/db827b51-836b-4c56-9825-ac47a5a3abd1" />
 
-### Gestion des Factures
-```html
-Interface comportant :
-• Liste paginée des factures avec filtres avancés
-• Formulaire de création avec sélection dynamique des produits
-• Calcul automatique des totaux (HT, TVA, TTC)
-• Système d'impression intégré avec mise en page professionnelle
-• Visualisation détaillée avec lignes de facture
+
+---
+
+## 👤 FONCTIONS UTILISATEUR
+
+### 📄 Gestion des Factures
+**Création et suivi des factures clients**
+<img width="945" height="448" alt="image" src="https://github.com/user-attachments/assets/4e7921fa-9a5e-41f7-a446-91d40aed42ed" />
+<img width="945" height="431" alt="image" src="https://github.com/user-attachments/assets/b2227703-ba8b-48f9-af16-7203e471ce98" />
+<img width="882" height="593" alt="image" src="https://github.com/user-attachments/assets/9915e88f-d137-467c-b4f6-995b20a579a1" />
+<img width="893" height="589" alt="image" src="https://github.com/user-attachments/assets/ea9b2627-d768-4929-9297-864bdad6bdf5" />
+
+### 🛒 Gestion des Produits
+**Catalogue et gestion des stocks**
+<img width="868" height="466" alt="image" src="https://github.com/user-attachments/assets/b6445cec-a220-47a5-b41a-0ade29137866" />
+<img width="834" height="469" alt="image" src="https://github.com/user-attachments/assets/cc3ffa7c-eb3e-4f95-91e4-a1d995822962" />
+<img width="770" height="606" alt="image" src="https://github.com/user-attachments/assets/f32eaf97-30bb-424f-833c-f086173f64c0" />
+<img width="813" height="439" alt="image" src="https://github.com/user-attachments/assets/4da2652c-303d-4741-b51c-8525dd1ed73a" />
+<img width="899" height="499" alt="image" src="https://github.com/user-attachments/assets/9053f494-2aa3-406c-a0f6-37fb32502993" />
+
+### 👥 Gestion des Clients
+**Annuaire et historique clients**
+<img width="898" height="421" alt="image" src="https://github.com/user-attachments/assets/f8a53268-d6e8-497d-bed6-d25cb7609b28" />
+<img width="935" height="374" alt="image" src="https://github.com/user-attachments/assets/9624d7c5-92b7-48e1-8e74-6271f16e8ae1" />
+<img width="915" height="430" alt="image" src="https://github.com/user-attachments/assets/22a33e9b-a32e-42ba-aa15-d17575e50890" />
+<img width="997" height="290" alt="image" src="https://github.com/user-attachments/assets/641d537b-26fb-454a-bc64-544477125dc2" />
+<img width="912" height="328" alt="image" src="https://github.com/user-attachments/assets/d3aba453-1fc2-4d5b-a4ec-cce4cb3d2716" />
+
+### 🏷️ Gestion des Catégories
+**Organisation des produits par catégories**
+<img width="945" height="445" alt="image" src="https://github.com/user-attachments/assets/08782f9e-b51d-4037-a5ec-ce321b5d83be" />
+<img width="945" height="327" alt="image" src="https://github.com/user-attachments/assets/c6bd3739-84d7-41de-9b3e-6a78458800b4" />
+<img width="945" height="274" alt="image" src="https://github.com/user-attachments/assets/b340b588-f70f-4d60-a6ce-187471d38b33" />
+<img width="945" height="666" alt="image" src="https://github.com/user-attachments/assets/ff5b7526-03bc-4901-9867-1bd2e602fdb1" />
+
+
+
+---
+
+## 🔧 FONCTIONS ADMINISTRATEUR
+
+### 📦 Gestion des Utilisateur
+<img width="945" height="343" alt="image" src="https://github.com/user-attachments/assets/593cc14c-4af8-43c5-93df-80e49ca1154c" />
+<img width="980" height="304" alt="image" src="https://github.com/user-attachments/assets/d55ad5f6-bbfb-4b7b-9e00-38efc0e821eb" />
+<img width="932" height="287" alt="image" src="https://github.com/user-attachments/assets/daad64d2-15a3-4662-a130-64200b3db053" />
+<img width="945" height="243" alt="image" src="https://github.com/user-attachments/assets/f2eda172-49fc-49cc-a24d-8263fb362f0d" />
+
+
+### 📈 Reporting & Analytics
+**Analyse complète et tableaux de bord avancés**
+<img width="945" height="459" alt="image" src="https://github.com/user-attachments/assets/7e94d22f-0280-4ebe-939a-2324421d0eb3" />
+<img width="957" height="474" alt="image" src="https://github.com/user-attachments/assets/8e1317f1-b8b3-4b85-9b20-80c8599df862" />
+
+
+---
+
+## 🎯 Caractéristiques Techniques
+- Interface responsive (desktop/tablette/mobile)
+- Calculs automatiques (TVA, totaux, marges)
+- Système d'alerte stocks et commandes
+- Export PDF/Excel des documents
+- Recherche et filtres multicritères
+- Historique complet des opérations
+- Sécurité multi-niveaux (rôles/permissions)
